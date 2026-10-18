@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ProductCategoryApp.Models.Product>
+@{
+    ViewData["Title"] = "Товары";
+}
+
+<h1>Товары</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Категория</th>
+            <th>Цена, руб</th>
+            <th>Остаток, шт</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <strong>@item.Name</strong><br />
+                    <small class="text-muted">@item.Description</small>
+                </td>
+                <td>@item.Category?.Name</td>
+                <td>@item.Price.ToString("N2")</td>
+                <td>@item.Stock</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <p class="text-muted">Товаров пока нет.</p>
+}

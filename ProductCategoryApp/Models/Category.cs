@@ -10,4 +10,7 @@ public class Category
     [StringLength(100)]
     [Display(Name = "Категория")]
     public string Name { get; set; } = string.Empty;
+
+    public List<Product> Products { get; set; } = new();  //В класс категорий добавляем список товаров
+
 }
