@@ -21,5 +21,4 @@ public class AppDbContext : DbContext
             .OnDelete(DeleteBehavior.Restrict);
     }
 
-    
 }
