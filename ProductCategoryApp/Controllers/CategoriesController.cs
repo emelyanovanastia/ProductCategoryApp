@@ -43,4 +43,58 @@ public class CategoriesController : Controller   //Контроллер спис
 
         return View(category);
     }
+
+    //Добавляем метод для редактирования записей
+
+    [HttpGet]
+    public async Task<IActionResult> Edit(int? id)
+    {
+        if (id == null) return NotFound();
+
+        var category = await _db.Categories.FindAsync(id);
+        if (category == null) return NotFound();
+
+        return View(category);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Category category)
+    {
+        if (id != category.Id) return NotFound();
+
+        if (ModelState.IsValid)
+        {
+            _db.Update(category);
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        return View(category);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(int? id)
+    {
+        if (id == null) return NotFound();
+
+        var category = await _db.Categories.FindAsync(id);
+        if (category == null) return NotFound();
+
+        return View(category);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        var category = await _db.Categories.FindAsync(id);
+        if (category != null)
+        {
+            _db.Categories.Remove(category);
+            await _db.SaveChangesAsync();
+        }
+
+        return RedirectToAction(nameof(Index));
+    }
 }

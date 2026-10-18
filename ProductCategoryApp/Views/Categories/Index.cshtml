@@ -12,6 +12,7 @@
         <tr>
             <th>Id</th>
             <th>Название</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -20,6 +21,10 @@
             <tr>
                 <td>@item.Id</td>
                 <td>@item.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-link">Изменить</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-link">Удалить</a>
+                </td>
             </tr>
         }
     </tbody>
