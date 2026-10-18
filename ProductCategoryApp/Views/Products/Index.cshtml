@@ -5,13 +5,35 @@
 
 <h1>Товары</h1>
 
+<p><a asp-action="Create" class="btn btn-success">+ Добавить товар</a></p>
+
+
+<form asp-action="Index" method="get" class="row g-2 mb-3">
+    <div class="col-auto">
+        <input type="text" name="search" value="@ViewBag.Search"
+               class="form-control" placeholder="Поиск по названию" />
+    </div>
+    <div class="col-auto">
+        <select name="categoryId" class="form-select"
+                asp-items="(SelectList)ViewBag.Categories">
+            <option value="">Все категории</option>
+        </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Найти</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Сбросить</a>
+    </div>
+</form>
+
+
 <table class="table table-striped">
     <thead>
         <tr>
             <th>Название</th>
             <th>Категория</th>
-            <th>Цена, руб</th>
-            <th>Остаток, шт</th>
+            <th>Цена</th>
+            <th>Остаток</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +47,10 @@
                 <td>@item.Category?.Name</td>
                 <td>@item.Price.ToString("N2")</td>
                 <td>@item.Stock</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-link">Изменить</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-link">Удалить</a>
+                </td>
             </tr>
         }
     </tbody>
