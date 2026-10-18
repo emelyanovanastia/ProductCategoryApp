@@ -29,6 +29,7 @@ public class CategoriesController : Controller   //Контроллер спис
         return View();
     }
 
+
     [HttpPost]    //Метод post, чтобы принять форму с данными и сохранить в БД
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("Name")] Category category)
